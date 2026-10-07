@@ -1,0 +1,1141 @@
+<<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Óptica Integral</title>
+
+    <!-- CONEXIÓN CON CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         LOGIN
+    ====================================================== -->
+
+    <div id="login" class="login-container">
+
+        <h1>Óptica Integral</h1>
+
+        <h2>Iniciar sesión</h2>
+
+        <form id="loginForm">
+
+            <label for="usuario">
+                Usuario
+            </label>
+
+            <input
+                type="text"
+                id="usuario"
+                placeholder="Ingrese su usuario"
+                autocomplete="username"
+                required
+            >
+
+            <label for="password">
+                Contraseña
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Ingrese su contraseña"
+                autocomplete="current-password"
+                required
+            >
+
+            <button type="submit">
+                Iniciar sesión
+            </button>
+
+            <p id="errorLogin"></p>
+
+        </form>
+
+        <p style="text-align:center; margin-top:15px; color:#64748b;">
+            Usuario: <strong>admin</strong><br>
+            Contraseña: <strong>1234</strong>
+        </p>
+
+    </div>
+
+
+    <!-- =====================================================
+         SISTEMA PRINCIPAL
+    ====================================================== -->
+
+    <div id="sistema" class="sistema oculto">
+
+        <!-- =================================================
+             MENÚ LATERAL
+        ================================================== -->
+
+        <aside class="sidebar">
+
+            <h2>Óptica Integral</h2>
+
+            <nav>
+
+                <button onclick="mostrarPagina('dashboard')">
+                    Dashboard
+                </button>
+
+                <button onclick="mostrarPagina('clientes')">
+                    Clientes
+                </button>
+
+                <button onclick="mostrarPagina('historias')">
+                    Historias optométricas
+                </button>
+
+                <button onclick="mostrarPagina('citas')">
+                    Citas
+                </button>
+
+                <button onclick="mostrarPagina('productos')">
+                    Productos
+                </button>
+
+                <button onclick="mostrarPagina('ventas')">
+                    Ventas
+                </button>
+
+                <button onclick="mostrarPagina('ordenes')">
+                    Órdenes
+                </button>
+
+                <button onclick="mostrarPagina('inventario')">
+                    Inventario
+                </button>
+
+                <button onclick="mostrarPagina('proveedores')">
+                    Proveedores
+                </button>
+
+                <button onclick="mostrarPagina('notificaciones')">
+                    Notificaciones
+                </button>
+
+                <button onclick="mostrarPagina('portal')">
+                    Portal del cliente
+                </button>
+
+                <button onclick="cerrarSesion()">
+                    Cerrar sesión
+                </button>
+
+            </nav>
+
+        </aside>
+
+
+        <!-- =================================================
+             CONTENIDO PRINCIPAL
+        ================================================== -->
+
+        <main class="contenido">
+
+            <header class="header">
+
+                <h1 id="tituloPagina">
+                    Dashboard
+                </h1>
+
+                <p id="fechaActual"></p>
+
+            </header>
+
+
+            <!-- =================================================
+                 DASHBOARD
+            ================================================== -->
+
+            <section id="dashboard" class="pagina">
+
+                <h2>Resumen general</h2>
+
+                <div class="cards">
+
+                    <div class="card">
+
+                        <h3>
+                            Clientes
+                        </h3>
+
+                        <p id="totalClientes">
+                            0
+                        </p>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <h3>
+                            Ventas
+                        </h3>
+
+                        <p id="totalVentas">
+                            $0
+                        </p>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <h3>
+                            Órdenes
+                        </h3>
+
+                        <p id="totalOrdenes">
+                            0
+                        </p>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <h3>
+                            Bajo stock
+                        </h3>
+
+                        <p id="productosBajoStock">
+                            0
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <h3>
+                        Últimas órdenes
+                    </h3>
+
+                    <div id="resumenOrdenes">
+
+                        <p>
+                            No hay órdenes registradas.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <h3>
+                        Próximas citas
+                    </h3>
+
+                    <div id="resumenCitas">
+
+                        <p>
+                            No hay citas registradas.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 CLIENTES
+            ================================================== -->
+
+            <section id="clientes" class="pagina">
+
+                <h2>
+                    Gestión de clientes
+                </h2>
+
+                <form id="formCliente">
+
+                    <input
+                        type="text"
+                        id="clienteNombre"
+                        placeholder="Nombre completo"
+                        required
+                    >
+
+                    <input
+                        type="text"
+                        id="clienteDocumento"
+                        placeholder="Documento"
+                        required
+                    >
+
+                    <input
+                        type="date"
+                        id="clienteNacimiento"
+                    >
+
+                    <input
+                        type="tel"
+                        id="clienteTelefono"
+                        placeholder="Teléfono"
+                    >
+
+                    <input
+                        type="email"
+                        id="clienteCorreo"
+                        placeholder="Correo electrónico"
+                    >
+
+                    <input
+                        type="text"
+                        id="clienteDireccion"
+                        placeholder="Dirección"
+                    >
+
+                    <textarea
+                        id="clienteObservaciones"
+                        placeholder="Observaciones"
+                    ></textarea>
+
+                    <button type="submit">
+                        Registrar cliente
+                    </button>
+
+                </form>
+
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Documento
+                            </th>
+
+                            <th>
+                                Nombre
+                            </th>
+
+                            <th>
+                                Teléfono
+                            </th>
+
+                            <th>
+                                Correo
+                            </th>
+
+                            <th>
+                                Acciones
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tablaClientes">
+                    </tbody>
+
+                </table>
+
+            </section>
+
+
+            <!-- =================================================
+                 HISTORIAS OPTOMÉTRICAS
+            ================================================== -->
+
+            <section id="historias" class="pagina">
+
+                <h2>
+                    Historias optométricas
+                </h2>
+
+                <form id="formHistoria">
+
+                    <select
+                        id="historiaCliente"
+                        required
+                    >
+
+                        <option value="">
+                            Seleccione un cliente
+                        </option>
+
+                    </select>
+
+
+                    <input
+                        type="date"
+                        id="historiaFecha"
+                        required
+                    >
+
+
+                    <input
+                        type="text"
+                        id="historiaOptometra"
+                        placeholder="Optómetra"
+                    >
+
+
+                    <input
+                        type="text"
+                        id="historiaMotivo"
+                        placeholder="Motivo de consulta"
+                    >
+
+
+                    <textarea
+                        id="historiaAntecedentes"
+                        placeholder="Antecedentes"
+                    ></textarea>
+
+
+                    <input
+                        type="text"
+                        id="odLejos"
+                        placeholder="OD lejos"
+                    >
+
+
+                    <input
+                        type="text"
+                        id="oiLejos"
+                        placeholder="OI lejos"
+                    >
+
+
+                    <input
+                        type="text"
+                        id="odCerca"
+                        placeholder="OD cerca"
+                    >
+
+
+                    <input
+                        type="text"
+                        id="oiCerca"
+                        placeholder="OI cerca"
+                    >
+
+
+                    <input
+                        type="text"
+                        id="adicion"
+                        placeholder="Adición"
+                    >
+
+
+                    <input
+                        type="text"
+                        id="dp"
+                        placeholder="Distancia pupilar"
+                    >
+
+
+                    <input
+                        type="text"
+                        id="altura"
+                        placeholder="Altura"
+                    >
+
+
+                    <input
+                        type="text"
+                        id="agudeza"
+                        placeholder="Agudeza visual"
+                    >
+
+
+                    <input
+                        type="text"
+                        id="tipoLente"
+                        placeholder="Tipo de lente"
+                    >
+
+
+                    <textarea
+                        id="historiaObservaciones"
+                        placeholder="Observaciones"
+                    ></textarea>
+
+
+                    <button type="submit">
+                        Guardar historia
+                    </button>
+
+                </form>
+
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Fecha
+                            </th>
+
+                            <th>
+                                Cliente
+                            </th>
+
+                            <th>
+                                Optómetra
+                            </th>
+
+                            <th>
+                                Motivo
+                            </th>
+
+                            <th>
+                                Fórmula
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tablaHistorias">
+                    </tbody>
+
+                </table>
+
+            </section>
+
+
+            <!-- =================================================
+                 CITAS
+            ================================================== -->
+
+            <section id="citas" class="pagina">
+
+                <h2>
+                    Agenda de citas
+                </h2>
+
+                <form id="formCita">
+
+                    <input
+                        type="date"
+                        id="citaFecha"
+                        required
+                    >
+
+                    <input
+                        type="time"
+                        id="citaHora"
+                        required
+                    >
+
+                    <select
+                        id="citaCliente"
+                        required
+                    >
+
+                        <option value="">
+                            Seleccione un cliente
+                        </option>
+
+                    </select>
+
+
+                    <input
+                        type="text"
+                        id="citaProfesional"
+                        placeholder="Profesional"
+                    >
+
+
+                    <input
+                        type="text"
+                        id="citaMotivo"
+                        placeholder="Motivo de la cita"
+                    >
+
+
+                    <select id="citaEstado">
+
+                        <option value="Pendiente">
+                            Pendiente
+                        </option>
+
+                        <option value="Confirmada">
+                            Confirmada
+                        </option>
+
+                        <option value="Atendida">
+                            Atendida
+                        </option>
+
+                        <option value="Cancelada">
+                            Cancelada
+                        </option>
+
+                    </select>
+
+
+                    <button type="submit">
+                        Registrar cita
+                    </button>
+
+                </form>
+
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Fecha
+                            </th>
+
+                            <th>
+                                Hora
+                            </th>
+
+                            <th>
+                                Cliente
+                            </th>
+
+                            <th>
+                                Profesional
+                            </th>
+
+                            <th>
+                                Motivo
+                            </th>
+
+                            <th>
+                                Estado
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tablaCitas">
+                    </tbody>
+
+                </table>
+
+            </section>
+
+
+            <!-- =================================================
+                 PRODUCTOS
+            ================================================== -->
+
+            <section id="productos" class="pagina">
+
+                <h2>
+                    Catálogo de productos
+                </h2>
+
+                <form id="formProducto">
+
+                    <input
+                        type="text"
+                        id="productoCodigo"
+                        placeholder="Código"
+                        required
+                    >
+
+                    <input
+                        type="text"
+                        id="productoNombre"
+                        placeholder="Nombre del producto"
+                        required
+                    >
+
+                    <input
+                        type="text"
+                        id="productoCategoria"
+                        placeholder="Categoría"
+                    >
+
+                    <input
+                        type="text"
+                        id="productoMarca"
+                        placeholder="Marca"
+                    >
+
+                    <input
+                        type="text"
+                        id="productoModelo"
+                        placeholder="Modelo"
+                    >
+
+                    <input
+                        type="text"
+                        id="productoProveedor"
+                        placeholder="Proveedor"
+                    >
+
+                    <input
+                        type="number"
+                        id="productoPrecio"
+                        placeholder="Precio"
+                        min="0"
+                    >
+
+                    <input
+                        type="number"
+                        id="productoExistencia"
+                        placeholder="Existencia"
+                        min="0"
+                    >
+
+                    <button type="submit">
+                        Registrar producto
+                    </button>
+
+                </form>
+
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Código
+                            </th>
+
+                            <th>
+                                Nombre
+                            </th>
+
+                            <th>
+                                Categoría
+                            </th>
+
+                            <th>
+                                Marca
+                            </th>
+
+                            <th>
+                                Precio
+                            </th>
+
+                            <th>
+                                Existencia
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tablaProductos">
+                    </tbody>
+
+                </table>
+
+            </section>
+
+
+            <!-- =================================================
+                 VENTAS
+            ================================================== -->
+
+            <section id="ventas" class="pagina">
+
+                <h2>
+                    Gestión de ventas
+                </h2>
+
+                <form id="formVenta">
+
+                    <select
+                        id="ventaCliente"
+                        required
+                    >
+
+                        <option value="">
+                            Seleccione un cliente
+                        </option>
+
+                    </select>
+
+
+                    <select
+                        id="ventaProducto"
+                        required
+                    >
+
+                        <option value="">
+                            Seleccione un producto
+                        </option>
+
+                    </select>
+
+
+                    <input
+                        type="number"
+                        id="ventaCantidad"
+                        placeholder="Cantidad"
+                        min="1"
+                        required
+                    >
+
+
+                    <select id="ventaPago">
+
+                        <option value="Efectivo">
+                            Efectivo
+                        </option>
+
+                        <option value="Tarjeta">
+                            Tarjeta
+                        </option>
+
+                        <option value="Transferencia">
+                            Transferencia
+                        </option>
+
+                    </select>
+
+
+                    <button type="submit">
+                        Registrar venta
+                    </button>
+
+                </form>
+
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Fecha
+                            </th>
+
+                            <th>
+                                Cliente
+                            </th>
+
+                            <th>
+                                Producto
+                            </th>
+
+                            <th>
+                                Cantidad
+                            </th>
+
+                            <th>
+                                Total
+                            </th>
+
+                            <th>
+                                Pago
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tablaVentas">
+                    </tbody>
+
+                </table>
+
+            </section>
+
+
+            <!-- =================================================
+                 ÓRDENES
+            ================================================== -->
+
+            <section id="ordenes" class="pagina">
+
+                <h2>
+                    Órdenes de lentes
+                </h2>
+
+                <form id="formOrden">
+
+                    <select
+                        id="ordenCliente"
+                        required
+                    >
+
+                        <option value="">
+                            Seleccione un cliente
+                        </option>
+
+                    </select>
+
+
+                    <select
+                        id="ordenProducto"
+                        required
+                    >
+
+                        <option value="">
+                            Seleccione un producto
+                        </option>
+
+                    </select>
+
+
+                    <textarea
+                        id="ordenObservaciones"
+                        placeholder="Observaciones de la orden"
+                    ></textarea>
+
+
+                    <button type="submit">
+                        Crear orden
+                    </button>
+
+                </form>
+
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Número
+                            </th>
+
+                            <th>
+                                Cliente
+                            </th>
+
+                            <th>
+                                Producto
+                            </th>
+
+                            <th>
+                                Estado
+                            </th>
+
+                            <th>
+                                Acción
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tablaOrdenes">
+                    </tbody>
+
+                </table>
+
+            </section>
+
+
+            <!-- =================================================
+                 INVENTARIO
+            ================================================== -->
+
+            <section id="inventario" class="pagina">
+
+                <h2>
+                    Inventario
+                </h2>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Código
+                            </th>
+
+                            <th>
+                                Producto
+                            </th>
+
+                            <th>
+                                Existencia
+                            </th>
+
+                            <th>
+                                Estado
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tablaInventario">
+                    </tbody>
+
+                </table>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROVEEDORES
+            ================================================== -->
+
+            <section id="proveedores" class="pagina">
+
+                <h2>
+                    Proveedores
+                </h2>
+
+                <form id="formProveedor">
+
+                    <input
+                        type="text"
+                        id="proveedorNombre"
+                        placeholder="Nombre del proveedor"
+                        required
+                    >
+
+                    <input
+                        type="text"
+                        id="proveedorNit"
+                        placeholder="NIT"
+                    >
+
+                    <input
+                        type="text"
+                        id="proveedorContacto"
+                        placeholder="Persona de contacto"
+                    >
+
+                    <input
+                        type="tel"
+                        id="proveedorTelefono"
+                        placeholder="Teléfono"
+                    >
+
+                    <input
+                        type="email"
+                        id="proveedorCorreo"
+                        placeholder="Correo"
+                    >
+
+                    <input
+                        type="text"
+                        id="proveedorDireccion"
+                        placeholder="Dirección"
+                    >
+
+                    <button type="submit">
+                        Registrar proveedor
+                    </button>
+
+                </form>
+
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Nombre
+                            </th>
+
+                            <th>
+                                NIT
+                            </th>
+
+                            <th>
+                                Contacto
+                            </th>
+
+                            <th>
+                                Teléfono
+                            </th>
+
+                            <th>
+                                Correo
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tablaProveedores">
+                    </tbody>
+
+                </table>
+
+            </section>
+
+
+            <!-- =================================================
+                 NOTIFICACIONES
+            ================================================== -->
+
+            <section id="notificaciones" class="pagina">
+
+                <h2>
+                    Notificaciones
+                </h2>
+
+                <div id="listaNotificaciones">
+
+                    <p>
+                        No hay notificaciones pendientes.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PORTAL DEL CLIENTE
+            ================================================== -->
+
+            <section id="portal" class="pagina">
+
+                <h2>
+                    Portal del cliente
+                </h2>
+
+                <div id="portalContenido">
+
+                    <p>
+                        No hay información disponible.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================================
+         CONEXIÓN CON JAVASCRIPT
+    ====================================================== -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
